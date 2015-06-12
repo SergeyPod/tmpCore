@@ -54,9 +54,9 @@ urlpatterns = patterns('',
     url(r'^dp/$', dpviews.doRequest, name='doRequest'),
 
     ### filebrowser
-    url(r'^filebrowser/', include('filebrowser.urls'), name='filebrowser'),
+    url(r'^filebrowser/', include('core.filebrowser.urls'), name='filebrowser'),
     ### PanDA Brokerage Monitor
-    url(r'^pbm/', include('pbm.urls'), name='pbm'),
+    url(r'^pbm/', include('core.pbm.urls'), name='pbm'),
     url(r'^status_summary/', include('core.status_summary.urls'), name='status_summary'),
 
     ### support views for core
