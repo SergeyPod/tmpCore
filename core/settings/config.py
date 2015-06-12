@@ -2,11 +2,12 @@
 from os.path import dirname, join
 
 import core
-from core import common, filebrowser, pbm
+#import core.filebrowser
+#import core.pbm
 
-DEBUG = True
-#DEBUG = False
-TEMPLATE_DEBUG = DEBUG
+from core import admin
+
+from local import dbaccess, MY_SECRET_KEY
 
 ALLOWED_HOSTS = [
     ### cern.ch
@@ -22,45 +23,9 @@ ALLOWED_HOSTS = [
     '127.0.0.1', '.localhost'
 ]
 
-from .local import dbaccess, MY_SECRET_KEY, defaultDatetimeFormat
-# Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-DATABASES = dbaccess
-from .logconfig import LOGGING
-
-MEDIA_ROOT = "/afs/cern.ch/user/s/spadolsk/panda/django1.6.1__python2.6.6/pythonpath/lib/python2.6/site-packages/core/common/media/"
-MEDIA_URL_BASE = '/media/'
-STATIC_ROOT = "/afs/cern.ch/user/s/spadolsk/panda/django1.6.1__python2.6.6/pythonpath/lib/python2.6/site-packages/core/common/static"
-STATIC_URL_BASE = '/static/'
-STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    join(dirname(core.common.__file__), 'static'),
-)
-SOURCE_SCHEDCONFIG = {
-    'core': 'http://atlas-agis-api.cern.ch/request/pandaqueue/query/list/?json&preset=schedconf.all&site_state=ANY&vo_name=core',
-}
-CUSTOM_DB_FIELDS = {
-    'jobListByProdUser': {
-        'jobparam': ['jobStatus', 'cpuConsumptionTime', 'creationTime', \
-                     'startTime', 'endTime', 'modificationHost', 'computingSite', \
-                     'prodUserName'], \
-        'configurable': ['jobparam', 'prodUserName', 'days']
-    }
-}
-
-
-#from local import defaultDatabase, MY_SECRET_KEY
-from local import dbaccess, MY_SECRET_KEY
 
 ### VIRTUALENV
-#VIRTUALENV_PATH = '/data/virtualenv/django1.6.1__python2.6.6'
-#VIRTUALENV_PATH = '/data/virtualenv/django1.6.1__python2.6.6__core'
-#VIRTUALENV_PATH = '/data/wenaus/virtualenv/twdev__django1.6.1__python2.6.6__core'
-VIRTUALENV_PATH = '/home/podolsky/pandamon/django1.6.1__python2.6.6'
-
-
+VIRTUALENV_PATH = '/data/wenaus/virtualenv/twrpm'
 
 ### WSGI
 WSGI_PATH = VIRTUALENV_PATH + '/pythonpath'
@@ -68,7 +33,7 @@ WSGI_PATH = VIRTUALENV_PATH + '/pythonpath'
 ### DB_ROUTERS for atlas's prodtask
 DATABASE_ROUTERS = [\
     'atlas.dbrouter.ProdMonDBRouter', \
-    'pbm.dbrouter.PandaBrokerageMonDBRouter', \
+    'core.pbm.dbrouter.PandaBrokerageMonDBRouter', \
 ]
 
 STATICFILES_DIRS = (
@@ -84,9 +49,10 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     join(dirname(core.__file__), 'templates'),
-    join(dirname(core.common.__file__), 'templates'),
-    join(dirname(filebrowser.__file__), 'templates'),
-    join(dirname(pbm.__file__), 'templates'),
+    join(dirname(admin.__file__), 'templates'),
+    join(dirname(core.__file__), 'templates'),
+    join(dirname(core.filebrowser.__file__), 'templates'),
+    join(dirname(core.pbm.__file__), 'templates'),
 )
 
 STATIC_ROOT = join(dirname(core.__file__), 'static')
@@ -97,8 +63,6 @@ MEDIA_URL_BASE = '/media/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = MY_SECRET_KEY
-
-
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
@@ -119,8 +83,8 @@ DATABASES = dbaccess
 ### on EC2: URL_PATH_PREFIX = '/bigpandamon' or URL_PATH_PREFIX = '/developersprefix'
 #URL_PATH_PREFIX = '/core'
 #URL_PATH_PREFIX = '/twrpmcore'
-URL_PATH_PREFIX = '/core'
-#URL_PATH_PREFIX = ''
+#URL_PATH_PREFIX = '/core'
+URL_PATH_PREFIX = ''
 ### on localhost:8000: URL_PATH_PREFIX = '/.'
 #URL_PATH_PREFIX = ''
 MEDIA_URL = URL_PATH_PREFIX + MEDIA_URL_BASE
@@ -151,10 +115,9 @@ FILTER_UI_ENV = {
             }, \
 }
 
-
 #LOG_ROOT = '/data/bigpandamon_virtualhosts/core/logs'
 #LOG_ROOT = '/data/wenaus/logs'
-LOG_ROOT = '/home/podolsky/pandamon/log'
+LOG_ROOT = '/data/wenaus/bigpandamon_virtualhosts/twrpm/logs'
 LOG_SIZE = 1000000000
 LOGGING = {
     'version': 1,

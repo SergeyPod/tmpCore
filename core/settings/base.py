@@ -1,6 +1,9 @@
 from os.path import dirname, join
+
+from core import common
 import core
-from core import common, filebrowser, pbm
+from core import filebrowser
+from core import pbm
 
 ADMINS = (
     ('Sergey Podolsky', 'spadolski@bnl.gov'),
@@ -96,6 +99,9 @@ INSTALLED_APPS_BIGPANDAMON_CORE = (
     'core.resource',
     'core.htcondor',
     'core.datatables',
+    'core.filebrowser',
+    'core.pbm',
+    'core.pbm.templatetags',
 #    'core.graphic', #NOT-IMPLEMENTED
     'core.gspread',
 )
@@ -122,8 +128,8 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     join(dirname(core.__file__), 'templates'),
     join(dirname(common.__file__), 'templates'),
-    join(dirname(filebrowser.__file__), 'templates'),
-    join(dirname(pbm.__file__), 'templates'),
+    join(dirname(core.filebrowser.__file__), 'templates'),
+    join(dirname(core.pbm.__file__), 'templates'),
 
 )
 
@@ -137,9 +143,9 @@ INSTALLED_APPS_BIGPANDAMON_core = (
     'core.status_summary',
 #    'core.htcondor', #NOT-NEEDED-IN-core
 #    'core.task', #NOT-IMPLEMENTED
-    'filebrowser',
-    'pbm',
-    'pbm.templatetags',
+    'core.filebrowser',
+    'core.pbm',
+    'core.pbm.templatetags',
     'django_extensions',
 )
 INSTALLED_APPS = COMMON_INSTALLED_APPS + INSTALLED_APPS_BIGPANDAMON_core
