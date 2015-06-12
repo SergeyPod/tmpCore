@@ -1,9 +1,6 @@
 from os.path import dirname, join
-
-from core import common
 import core
-import filebrowser
-import pbm
+from core import common, filebrowser, pbm
 
 ADMINS = (
     ('Sergey Podolsky', 'spadolski@bnl.gov'),

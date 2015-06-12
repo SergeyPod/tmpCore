@@ -2,8 +2,7 @@
 from os.path import dirname, join
 
 import core
-import filebrowser
-import pbm
+from core import common, filebrowser, pbm
 
 DEBUG = True
 #DEBUG = False

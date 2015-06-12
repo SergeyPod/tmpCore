@@ -1,7 +1,7 @@
 # Database settings
 # Make this unique, and don't share it with anybody.
 
-import os
+import os,sys
 try:
     execfile(os.environ['LOCAL_EXTRA_SETTINGS'])
 except:
