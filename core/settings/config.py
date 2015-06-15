@@ -32,7 +32,7 @@ WSGI_PATH = VIRTUALENV_PATH + '/pythonpath'
 
 ### DB_ROUTERS for atlas's prodtask
 DATABASE_ROUTERS = [\
-    'atlas.dbrouter.ProdMonDBRouter', \
+    'core.dbrouter.ProdMonDBRouter', \
     'core.pbm.dbrouter.PandaBrokerageMonDBRouter', \
 ]
 
