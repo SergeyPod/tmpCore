@@ -55,7 +55,7 @@
 		<td>{% if f.jeditaskid %} <a href="{% url 'fileInfo' %}?lfn={{ f.lfn }}&jeditaskid={{ f.jeditaskid }}">{{ f.jeditaskid }}</a> {% endif %}</td>
 		<td>{{ f.type }}</td>
 		<td><a href="{% url 'jobInfo' %}?pandaid={{ f.pandaid }}">{{ f.pandaid }}</a></td>
-		<td>{{ f.firstevent }}</td>
+		<td>{{ f.startevent }}</td>
 		<td>{{ f.endevent }}</td>
 		<td class='{{frec.status}}'>{{ f.status }}</td>
 		<td>{% if f.attemptnr %} {{ f.attemptnr }} ({{ f.maxattempt }}){% endif %}</td>
